@@ -3,16 +3,14 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
  
- 
 app = Flask(__name__)
- 
  
 app.secret_key = 'your secret key'
  
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'your password'
-app.config['MYSQL_DB'] = 'geeklogin'
+app.config['MYSQL_PASSWORD'] = 'mypassword'
+app.config['MYSQL_DB'] = 'test'
  
 mysql = MySQL(app)
  
