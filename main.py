@@ -3,7 +3,7 @@ from flask_mysqldb import MySQL
 import MySQLdb.cursors
 import re
  
-app = Flask(__name__)
+app = Flask(__name__, static_folder='static')
  
 app.secret_key = 'your secret key'
  
@@ -13,6 +13,19 @@ app.config['MYSQL_PASSWORD'] = 'mypassword'
 app.config['MYSQL_DB'] = 'test'
  
 mysql = MySQL(app)
+
+
+
+@app.route('/index', methods=['POST'])
+def index():
+    msg = ''
+    if request.method == 'POST' and 'task' in request.form:
+        print("starting task")
+        task = request.form['task']
+        cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
+        cursor.execute("INSERT INTO test.tasks VALUES (id, % s)", [task])
+        mysql.connection.commit() 
+    return render_template('index.html', msg=msg)
  
 @app.route('/')
 @app.route('/login', methods =['GET', 'POST'])
